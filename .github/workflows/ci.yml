@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         node-version: [14.x]
-    
+
     steps:
     - uses: actions/checkout@v2
 
@@ -21,10 +21,19 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-        
+
     - name: Setup
       run: npm ci
 
     - name: Test
       run: |
         npm test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        files: ./coverage/fill-the-gap/lcov.info
+        flags: unittests
+        name: Unit tests
+        fail_ci_if_error: true
+        verbose: true

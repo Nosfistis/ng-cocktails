@@ -18,7 +18,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
 
@@ -31,11 +31,11 @@ jobs:
     - name: Test
       run: |
         npm test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
-
+    
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v2
       with:
-        files: ./coverage/fill-the-gap/lcov.info
+        files: ./coverage/ng-cocktails/lcov.info
         flags: unittests
         name: Unit tests
         fail_ci_if_error: true

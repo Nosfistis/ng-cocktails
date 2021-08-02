@@ -4,4 +4,7 @@ export interface Category {
   strCategory: string;
 }
 
-export type CategoryQueryResult = Pick<Cocktail, 'isDrink' | 'strDrink' | 'strDrinkThumb'>;
+export type CategoryQueryResult = Pick<
+  Cocktail,
+  'isDrink' | 'strDrink' | 'strDrinkThumb'
+>;

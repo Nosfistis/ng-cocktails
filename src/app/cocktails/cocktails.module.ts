@@ -9,9 +9,20 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
 import { CocktailsRoutingModule } from './cocktails-routing.module';
+import { CocktailsComponent } from './cocktails.component';
 
 @NgModule({
-  imports: [CommonModule, CocktailsRoutingModule, MatCardModule, MatFormFieldModule, MatSelectModule, MatOptionModule, ReactiveFormsModule, MatInputModule, MatButtonModule],
+  declarations: [CocktailsComponent],
+  imports: [
+    CommonModule,
+    CocktailsRoutingModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatButtonModule,
+  ],
 })
-export class CocktailsModule {
-}
+export class CocktailsModule {}

@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { Category } from './category';
 
@@ -11,7 +14,9 @@ describe('CocktailService', () => {
   let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
 
-  const drinks: Cocktail[] = [{ strDrink: 'abc', strCategory: 'Drink' } as Cocktail];
+  const drinks: Cocktail[] = [
+    { strDrink: 'abc', strCategory: 'Drink' } as Cocktail,
+  ];
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -29,8 +34,7 @@ describe('CocktailService', () => {
   });
 
   it('should request all cocktails', () => {
-    service.getCocktails()
-      .subscribe(data => expect(data).toEqual(drinks));
+    service.getCocktails().subscribe((data) => expect(data).toEqual(drinks));
 
     const req = httpTestingController.expectOne('/search.php?f=a');
 
@@ -39,8 +43,9 @@ describe('CocktailService', () => {
   });
 
   it('should request cocktails by name', () => {
-    service.getCocktailsByName('abc')
-      .subscribe(data => expect(data).toEqual(drinks));
+    service
+      .getCocktailsByName('abc')
+      .subscribe((data) => expect(data).toEqual(drinks));
 
     const req = httpTestingController.expectOne('/search.php?s=abc');
 
@@ -49,8 +54,9 @@ describe('CocktailService', () => {
   });
 
   it('should return empty list if no cocktail is found by name', () => {
-    service.getCocktailsByName('Test')
-      .subscribe(data => expect(data).toEqual([]));
+    service
+      .getCocktailsByName('Test')
+      .subscribe((data) => expect(data).toEqual([]));
 
     const req = httpTestingController.expectOne('/search.php?s=Test');
 
@@ -59,8 +65,9 @@ describe('CocktailService', () => {
   });
 
   it('should request cocktails by category', () => {
-    service.getCocktailsByCategory('Drink')
-      .subscribe(data => expect(data).toEqual(drinks));
+    service
+      .getCocktailsByCategory('Drink')
+      .subscribe((data) => expect(data).toEqual(drinks));
 
     const req = httpTestingController.expectOne('/filter.php?c=Drink');
 
@@ -71,8 +78,9 @@ describe('CocktailService', () => {
   it('should retrieve categories', () => {
     const categories: Category[] = [{ strCategory: 'Drink' }];
 
-    service.getCategories()
-      .subscribe(data => expect(data).toEqual(categories));
+    service
+      .getCategories()
+      .subscribe((data) => expect(data).toEqual(categories));
 
     const req = httpTestingController.expectOne('/list.php?c=list');
 

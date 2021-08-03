@@ -60,17 +60,18 @@ describe('CocktailsComponent', () => {
   ] as Cocktail[];
 
   beforeEach(async () => {
-    cocktailService = jasmine.createSpyObj<CocktailService>(
-      'CocktailService',
-      [
-        'getCategories',
-        'getCocktails',
-        'getCocktailsByCategory',
-        'getCocktailsByName',
-      ],
-    );
+    cocktailService = jasmine.createSpyObj<CocktailService>('CocktailService', [
+      'getCategories',
+      'getCocktails',
+      'getCocktailsByCategory',
+      'getCocktailsByName',
+    ]);
     await TestBed.configureTestingModule({
-      imports: [RouterModule.forRoot([]), CocktailsModule, NoopAnimationsModule],
+      imports: [
+        RouterModule.forRoot([]),
+        CocktailsModule,
+        NoopAnimationsModule,
+      ],
       providers: [{ provide: CocktailService, useValue: cocktailService }],
     }).compileComponents();
 
@@ -90,14 +91,24 @@ describe('CocktailsComponent', () => {
   });
 
   it('should render all cocktails on page load', () => {
-    expect(page.cocktailTitles.map(title => title.textContent)).toEqual(cocktails.map(cocktail => cocktail.strDrink));
-    expect(page.cocktailCategories.map(category => category.textContent)).toEqual(cocktails.map(cocktail => cocktail.strCategory));
-    expect(page.cocktailThumbnails.map(thumbnail => thumbnail.src)).toEqual(cocktails.map(cocktail => cocktail.strDrinkThumb));
-    expect(page.cocktailThumbnails.map(thumbnail => thumbnail.alt)).toEqual(cocktails.map(cocktail => cocktail.strDrink));
+    expect(page.cocktailTitles.map((title) => title.textContent)).toEqual(
+      cocktails.map((cocktail) => cocktail.strDrink)
+    );
+    expect(
+      page.cocktailCategories.map((category) => category.textContent)
+    ).toEqual(cocktails.map((cocktail) => cocktail.strCategory));
+    expect(page.cocktailThumbnails.map((thumbnail) => thumbnail.src)).toEqual(
+      cocktails.map((cocktail) => cocktail.strDrinkThumb)
+    );
+    expect(page.cocktailThumbnails.map((thumbnail) => thumbnail.alt)).toEqual(
+      cocktails.map((cocktail) => cocktail.strDrink)
+    );
   });
 
   it('should render cocktails by category', async () => {
-    cocktailService.getCocktailsByCategory.and.returnValue(of(cocktails.slice(2)));
+    cocktailService.getCocktailsByCategory.and.returnValue(
+      of(cocktails.slice(2))
+    );
 
     page.categoryValue = 'Cocktail';
     page.searchButton.click();
@@ -106,8 +117,12 @@ describe('CocktailsComponent', () => {
     await fixture.whenStable();
     fixture.detectChanges();
 
-    expect(TestBed.inject(ActivatedRoute).snapshot.queryParams).toEqual({ category: 'Cocktail' });
-    expect(cocktailService.getCocktailsByCategory).toHaveBeenCalledOnceWith('Cocktail');
+    expect(TestBed.inject(ActivatedRoute).snapshot.queryParams).toEqual({
+      category: 'Cocktail',
+    });
+    expect(cocktailService.getCocktailsByCategory).toHaveBeenCalledOnceWith(
+      'Cocktail'
+    );
     expect(cocktailService.getCocktailsByName).not.toHaveBeenCalled();
     expect(page.cocktailTitles).toHaveSize(1);
     expect(page.cocktailCategories).toHaveSize(1);
@@ -124,7 +139,9 @@ describe('CocktailsComponent', () => {
     await fixture.whenStable();
     fixture.detectChanges();
 
-    expect(TestBed.inject(ActivatedRoute).snapshot.queryParams).toEqual({ name: 'Aca' });
+    expect(TestBed.inject(ActivatedRoute).snapshot.queryParams).toEqual({
+      name: 'Aca',
+    });
     expect(cocktailService.getCocktailsByName).toHaveBeenCalledOnceWith('Aca');
     expect(cocktailService.getCocktailsByCategory).not.toHaveBeenCalled();
     expect(page.cocktailTitles).toHaveSize(1);
@@ -134,7 +151,9 @@ describe('CocktailsComponent', () => {
 
   it('should render cocktails by name and category', async () => {
     cocktailService.getCocktailsByName.and.returnValue(of(cocktails.slice(1)));
-    cocktailService.getCocktailsByCategory.and.returnValue(of(cocktails.slice(2)));
+    cocktailService.getCocktailsByCategory.and.returnValue(
+      of(cocktails.slice(2))
+    );
 
     page.nameValue = 'A';
     page.categoryValue = 'Cocktail';
@@ -144,9 +163,14 @@ describe('CocktailsComponent', () => {
     await fixture.whenStable();
     fixture.detectChanges();
 
-    expect(TestBed.inject(ActivatedRoute).snapshot.queryParams).toEqual({ name: 'A', category: 'Cocktail' });
+    expect(TestBed.inject(ActivatedRoute).snapshot.queryParams).toEqual({
+      name: 'A',
+      category: 'Cocktail',
+    });
     expect(cocktailService.getCocktailsByName).toHaveBeenCalledOnceWith('A');
-    expect(cocktailService.getCocktailsByCategory).toHaveBeenCalledOnceWith('Cocktail');
+    expect(cocktailService.getCocktailsByCategory).toHaveBeenCalledOnceWith(
+      'Cocktail'
+    );
     expect(page.cocktailTitles).toHaveSize(1);
     expect(page.cocktailCategories).toHaveSize(1);
     expect(page.cocktailThumbnails).toHaveSize(1);

@@ -25,29 +25,31 @@ export class CocktailsComponent {
     switchMap(({ category, name }) =>
       category && name
         ? forkJoin({
-          name: this.cocktailService.getCocktailsByName(name),
-          category: this.getCocktailsByCategory(category),
-        }).pipe(map(this.combineNameAndCategoryResults))
+            name: this.cocktailService.getCocktailsByName(name),
+            category: this.getCocktailsByCategory(category),
+          }).pipe(map(this.combineNameAndCategoryResults))
         : category
-          ? this.getCocktailsByCategory(category)
-          : name
-            ? this.cocktailService.getCocktailsByName(name)
-            : this.cocktailService.getCocktails(),
-    ),
+        ? this.getCocktailsByCategory(category)
+        : name
+        ? this.cocktailService.getCocktailsByName(name)
+        : this.cocktailService.getCocktails()
+    )
   );
 
   constructor(
     private readonly cocktailService: CocktailService,
     private readonly router: Router,
-    private readonly route: ActivatedRoute,
-  ) {
-  }
+    private readonly route: ActivatedRoute
+  ) {}
 
   onSearch(): void {
     this.router.navigate(['.'], { queryParams: this.searchForm.value });
   }
 
-  private combineNameAndCategoryResults({ name, category }: {
+  private combineNameAndCategoryResults({
+    name,
+    category,
+  }: {
     name: Cocktail[];
     category: ListItem[];
   }): ListItem[] {
@@ -59,8 +61,8 @@ export class CocktailsComponent {
       .getCocktailsByCategory(category)
       .pipe(
         map((results) =>
-          results.map((result) => ({ ...result, strCategory: category })),
-        ),
+          results.map((result) => ({ ...result, strCategory: category }))
+        )
       );
   }
 }

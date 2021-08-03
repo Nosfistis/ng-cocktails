@@ -18,7 +18,9 @@ export class BasePage<C> {
   }
 
   getInputValue<T = string>(selector: string | HTMLInputElement): T {
-    return selector instanceof Element ? selector.value : getInputValue(this.fixture, this.sanitizeSelector(selector));
+    return selector instanceof Element
+      ? selector.value
+      : getInputValue(this.fixture, this.sanitizeSelector(selector));
   }
 
   setInputValue<T = string>(selector: string, value: T): void {

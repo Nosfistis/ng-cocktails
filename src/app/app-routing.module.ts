@@ -7,6 +7,15 @@ const routes: Routes = [
     loadChildren: () =>
       import('./cocktails/cocktails.module').then((m) => m.CocktailsModule),
   },
+  {
+    path: 'error',
+    loadChildren: () =>
+      import('./error/error.module').then((m) => m.ErrorModule),
+  },
+  {
+    path: '**',
+    redirectTo: 'error/not-found',
+  },
 ];
 
 @NgModule({

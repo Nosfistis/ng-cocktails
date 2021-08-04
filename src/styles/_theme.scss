@@ -38,7 +38,7 @@ $dark-theme: mat.define-dark-theme(
 @include mat.slide-toggle-theme($dark-theme);
 @include mat.toolbar-theme($dark-theme);
 
-a {
+a:not(.mat-button-base) {
   color: mat.get-color-from-palette(map.get($dark-theme, foreground), text);
 }
 
@@ -54,7 +54,7 @@ a {
   @include mat.slide-toggle-theme($light-theme);
   @include mat.toolbar-theme($light-theme);
 
-  a {
+  a:not(.mat-button-base) {
     color: mat.get-color-from-palette(map.get($light-theme, foreground), text);
   }
 }

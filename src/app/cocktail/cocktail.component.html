@@ -1,4 +1,4 @@
-<a mat-button (click)="goBack()">Go back to the list</a>
+<a (click)="goBack()" mat-button>Go back to the list</a>
 
 <div class="card-container">
   <mat-card *ngIf="cocktail$ | async as cocktail" class="card">
@@ -15,9 +15,9 @@
     />
     <mat-card-content>
       <h2>Ingredients</h2>
-      <mat-list>
+      <mat-list role="list">
         <ng-container *ngFor="let i of ingredientList">
-          <mat-list-item *ngIf="cocktail | ingredient: i">{{
+          <mat-list-item *ngIf="cocktail | ingredient: i" role="listitem">{{
             cocktail | ingredient: i
           }}</mat-list-item>
         </ng-container>

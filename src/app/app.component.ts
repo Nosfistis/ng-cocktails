@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,21 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  title = 'ng-cocktails';
+  checked = false;
+
+  constructor(@Inject(DOCUMENT) private readonly document: Document) {
+    this.onChange(localStorage.getItem('theme') === 'true');
+  }
+
+  onChange(checked: boolean): void {
+    this.checked = checked;
+
+    if (checked) {
+      this.document.body.classList.add('light-theme');
+    } else {
+      this.document.body.classList.remove('light-theme');
+    }
+
+    localStorage.setItem('theme', checked ? 'true' : 'false');
+  }
 }

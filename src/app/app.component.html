@@ -1,6 +1,10 @@
 <header>
   <mat-toolbar>
-    <span>Cocktails</span>
+    <a routerLink="/">Cocktails</a>
+    <span class="spacer"></span>
+    <mat-slide-toggle (change)="onChange($event.checked)" [checked]="checked">
+      <mat-icon>{{ checked ? "light_mode" : "dark_mode" }}</mat-icon>
+    </mat-slide-toggle>
   </mat-toolbar>
 </header>
 <main role="main">

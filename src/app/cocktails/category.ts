@@ -6,5 +6,5 @@ export interface Category {
 
 export type CategoryQueryResult = Pick<
   Cocktail,
-  'isDrink' | 'strDrink' | 'strDrinkThumb'
+  'idDrink' | 'strDrink' | 'strDrinkThumb'
 >;

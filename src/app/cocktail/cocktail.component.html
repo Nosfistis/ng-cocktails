@@ -1,0 +1,30 @@
+<a mat-button (click)="goBack()">Go back to the list</a>
+
+<div class="card-container">
+  <mat-card *ngIf="cocktail$ | async as cocktail" class="card">
+    <mat-card-header>
+      <mat-card-title>
+        <h1>{{ cocktail.strDrink }}</h1>
+      </mat-card-title>
+      <mat-card-subtitle>{{ cocktail.strCategory }}</mat-card-subtitle>
+    </mat-card-header>
+    <img
+      [alt]="cocktail.strDrink"
+      [src]="cocktail.strDrinkThumb"
+      mat-card-image
+    />
+    <mat-card-content>
+      <h2>Ingredients</h2>
+      <mat-list>
+        <ng-container *ngFor="let i of ingredientList">
+          <mat-list-item *ngIf="cocktail | ingredient: i">{{
+            cocktail | ingredient: i
+          }}</mat-list-item>
+        </ng-container>
+      </mat-list>
+
+      <h2>Instructions</h2>
+      <p>{{ cocktail.strInstructions }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>

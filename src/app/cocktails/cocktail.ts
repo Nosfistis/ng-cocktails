@@ -1,6 +1,6 @@
 import { Category } from './category';
 
-type Count =
+export type Count =
   | '1'
   | '2'
   | '3'
@@ -16,19 +16,19 @@ type Count =
   | '13'
   | '14'
   | '15';
-type IngredientKey = `strIngredient${Count}`;
-type MeasureKey = `strMeasure${Count}`;
+export type IngredientKey = `strIngredient${Count}`;
+export type MeasureKey = `strMeasure${Count}`;
 
 type Language = '' | 'DE' | 'ES' | 'FR' | 'IT' | 'ZH-HANS' | 'ZH-HANT';
 type InstructionsKey = `strInstructions${Language}`;
 
 type CocktailWithExtras = {
-  [Property in IngredientKey | MeasureKey | InstructionsKey]: string;
+  [Property in IngredientKey | MeasureKey | InstructionsKey]: string | null;
 };
 
 export interface Cocktail extends CocktailWithExtras, Category {
   dateModifier: string;
-  isDrink: string;
+  idDrink: string;
   strAlcoholic: string;
   strCreativeCommonsConfirmed: string;
   strDrink: string;

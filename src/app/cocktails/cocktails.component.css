@@ -19,8 +19,3 @@
   max-width: 400px;
   margin: 8px;
 }
-
-.card-container {
-  display: flex;
-  flex-wrap: wrap;
-}

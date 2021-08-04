@@ -7,12 +7,15 @@ import { map, switchMap } from 'rxjs/operators';
 import { Cocktail } from './cocktail';
 import { CocktailService } from './cocktail.service';
 
-type ListItem = Pick<Cocktail, 'strCategory' | 'strDrink' | 'strDrinkThumb'>;
+type ListItem = Pick<
+  Cocktail,
+  'strCategory' | 'idDrink' | 'strDrink' | 'strDrinkThumb'
+>;
 
 @Component({
   selector: 'app-cocktails',
   templateUrl: './cocktails.component.html',
-  styleUrls: ['./cocktails.component.css'],
+  styleUrls: ['../../styles/card.css', './cocktails.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CocktailsComponent {

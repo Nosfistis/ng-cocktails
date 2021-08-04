@@ -8,6 +8,11 @@ const routes: Routes = [
     path: '',
     component: CocktailsComponent,
   },
+  {
+    path: ':idDrink',
+    loadChildren: () =>
+      import('../cocktail/cocktail.module').then((m) => m.CocktailModule),
+  },
 ];
 
 @NgModule({

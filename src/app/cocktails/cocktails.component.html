@@ -6,7 +6,7 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Category</mat-label>
-    <select matNativeControl formControlName="category" name="category">
+    <select formControlName="category" matNativeControl name="category">
       <option [ngValue]="null">All categories</option>
       <option
         *ngFor="let category of categories$ | async"
@@ -25,7 +25,11 @@
 <div class="card-container">
   <mat-card *ngFor="let cocktail of cocktails$ | async" class="card">
     <mat-card-header>
-      <mat-card-title>{{ cocktail.strDrink }}</mat-card-title>
+      <mat-card-title>
+        <a [routerLink]="[cocktail.idDrink]" class="card-title-link">{{
+          cocktail.strDrink
+        }}</a>
+      </mat-card-title>
       <mat-card-subtitle>{{ cocktail.strCategory }}</mat-card-subtitle>
     </mat-card-header>
     <img
@@ -34,6 +38,8 @@
       mat-card-image
     />
     <mat-card-content></mat-card-content>
-    <mat-card-actions></mat-card-actions>
+    <mat-card-actions>
+      <a [routerLink]="[cocktail.idDrink]" mat-button>See more</a>
+    </mat-card-actions>
   </mat-card>
 </div>
